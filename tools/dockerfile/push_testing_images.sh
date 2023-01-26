@@ -64,6 +64,9 @@ ALL_DOCKERFILE_DIRS=(
   tools/dockerfile/distribtest/*
   third_party/rake-compiler-dock/*
 )
+ALL_DOCKERFILE_DIRS=(
+    tools/dockerfile/grpc_artifact_python_manylinux2014_aarch64
+)
 
 CHECK_FAILED=""
 
@@ -86,7 +89,7 @@ do
 
   if [ "${LOCAL_ONLY_MODE}" == "" ]
   then
-    DOCKER_IMAGE_DIGEST_REMOTE=$(gcloud artifacts docker images describe "${ARTIFACT_REGISTRY_PREFIX}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}" --format=json | jq -r '.image_summary.digest')
+    DOCKER_IMAGE_DIGEST_REMOTE="" # $(gcloud artifacts docker images describe "${ARTIFACT_REGISTRY_PREFIX}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}" --format=json | jq -r '.image_summary.digest')
 
     if [ "${DOCKER_IMAGE_DIGEST_REMOTE}" != "" ]
     then
